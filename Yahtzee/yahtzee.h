@@ -43,6 +43,7 @@ void calcSmStr(int diceArr[], int* smStr);
 void calcLgStr(int diceArr[], int* lgStr);
 void calcYahtzee(int diceArr[], int* yahtzee);
 void sumChance(int diceArr[], int* chance);
+int addArr(int diceArr[]);
 
 
 

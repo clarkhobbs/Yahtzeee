@@ -116,12 +116,13 @@ void displayScoreCard(int ones, int twos, int threes, int fours, int fives, int 
 //create functions for the scores that vary that return the sums at that moment in the loop.
 
 void calcOnes(int diceArr[], int* ones) {
-
+	int num = 0;
 	for (int i = 0; i < 5; i++) {
 		if (diceArr[i] == 1) {
-			*ones++;
+			num++;
 		}
 	}
+	*ones = num;
 
 }
 void calcTwos(int diceArr[], int* twos) {
@@ -139,56 +140,85 @@ void calcTwos(int diceArr[], int* twos) {
 void calcThrees(int diceArr[], int* threes) {
 	int counter = 0;
 	for (int i = 0; i < 5; i++) {
-		if (diceArr[i] == 2) {
+		if (diceArr[i] == 3) {
 			counter++;
 		}
 
 	}
-	*threes = counter * 2;
+	*threes = counter * 3;
 
 }
 void calcFours(int diceArr[], int* fours) {
 	int counter = 0;
 	for (int i = 0; i < 5; i++) {
-		if (diceArr[i] == 2) {
+		if (diceArr[i] == 4) {
 			counter++;
 		}
 
 	}
-	*fours = counter * 2;
+	*fours = counter * 4;
 }
 void calcFives(int diceArr[], int* fives) {
 	int counter = 0;
 	for (int i = 0; i < 5; i++) {
-		if (diceArr[i] == 2) {
+		if (diceArr[i] == 5) {
 			counter++;
 		}
 
 	}
-	*fives = counter * 2;
+	*fives = counter * 5;
 }
 void calcSixes(int diceArr[], int* sixes) {
 	int counter = 0;
 	for (int i = 0; i < 5; i++) {
-		if (diceArr[i] == 2) {
+		if (diceArr[i] == 6) {
 			counter++;
 		}
 
 	}
-	*sixes = counter * 2;
+	*sixes = counter * 6;
 }
 void calcSum(int ones, int twos, int threes, int fours, int fives, int sixes, int* sum) {
 	*sum = ones + twos + threes + fours + fives + sixes;
 }
 void calcBonus(int sum, int* bonus) {
+	int theBonus = 0;
 	if (sum >= 35) {
-		*bonus = 35;
+		theBonus = 35;
 	}
 	else {
-		*bonus = 0;
+		theBonus = 0;
+	}
+	*bonus = theBonus;
+}
+
+
+int addArr(int diceArr[]) {
+	int total = 0;
+	for (int i = 0; i < 4; i++) {
+		total = diceArr[i] + diceArr[i + 1];
+	}
+
+	return total;
+}
+
+void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
+	bool present;
+	
+	for (int i = 0; i < 5; i++) {
+		for (j = i; j < 14; j++) {
+			if (diceArr[i] == diceArr[j + 1]) {
+				present = true;
+			}
+			else {
+				present = false;
+			}
+		}
+	}
+	if (present == true) {
+		*tOfAKind = addArr(diceArr);
 	}
 }
-void calcThreeOfAKind(int diceArr[], int* tOfAKind);
 void calcFourOfAKind(int diceArr[], int* fOfAKind);
 void calcFullHouse(int diceArr[], int* fullHouse);
 void calcSmStr(int diceArr[], int* smStr);

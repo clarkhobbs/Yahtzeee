@@ -7,8 +7,6 @@ int main(void) {
 
 	//Changing dice Variables
 	int die1 = 0, die2 = 0, die3 = 0, die4 = 0, die5 = 0;
-	//Dice array
-	int diceArr[5] = { die1, die2, die3, die4, die5 };
 
 	rollDie(&die1);
 	printf("%d", die1);
@@ -20,6 +18,9 @@ int main(void) {
 	printf("%d", die4);
 	rollDie(&die5);
 	printf("%d", die5);
+
+	//Dice Array
+	int diceArr[5] = { die1, die2, die3, die4, die5 };
 
 
 	calcOnes(diceArr, &ones);
