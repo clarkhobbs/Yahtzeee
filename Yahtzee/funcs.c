@@ -219,9 +219,106 @@ void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
 		*tOfAKind = addArr(diceArr);
 	}
 }
-void calcFourOfAKind(int diceArr[], int* fOfAKind);
-void calcFullHouse(int diceArr[], int* fullHouse);
-void calcSmStr(int diceArr[], int* smStr);
-void calcLgStr(int diceArr[], int* lgStr);
-void calcYahtzee(int diceArr[], int* yahtzee);
-void sumChance(int diceArr[], int* chance);
+void calcFourOfAKind(int diceArr[], int* fOfAKind) {
+	int tempArr[] = diceArr;
+	sort(tempArr, 5);
+	if (tempArr[0] == tempArr[1] && tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3]) {
+			*fOfAKind == addArr(tempArr);
+	}
+	else if (tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3] && tempArr[3] == tempArr[4]) {
+		*fOfAKind = addArr(tempArr);
+	}
+	else {
+		*fOfAKind = 0;
+	}
+}
+void calcFullHouse(int diceArr[], int* fullHouse) {
+	int tempArr[] = diceArr;
+	sort(tempArr, 5);
+	if (tempArr[1] == tempArr[2] && tempArr[3] == tempArr[4] && tempArr[4] == tempArr[5]) {
+		*fullHouse = 25;
+	}
+	else if (tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3] && tempArr[4] == tempArr[5]) {
+		*fullHouse = 25;
+	}
+	else {
+		*fullHouse = 0;
+	}
+}
+void calcSmStr(int diceArr[], int* smStr) {
+	int tempArr[] = diceArr;
+	sort(tempArr, 5);
+	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1) {
+		*smStr = 30;
+	}
+	else {
+		*smStr = 0;
+	}
+}
+void calcLgStr(int diceArr[], int* lgStr) {
+	int tempArr[] = diceArr;
+	sort(tempArr, 5);
+	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1 && tempArr[4] == tempArr[3] + 1) {
+		*lgStr = 40;
+	}
+	else {
+		*lgStr = 0;
+	}
+}
+void calcYahtzee(int diceArr[], int* yahtzee) {
+	int passes = 1;
+	for (int i = 0; i <= 4; i++) {
+		if (diceArr[i] == diceArr[i + 1]) {
+			passes++;
+		}
+		else {
+			*yahtzee = 0;
+		}
+	}
+	if (passes == 4) {
+		*yahtzee = 50;
+	}
+}
+
+
+void sumChance(int diceArr[], int* chance) {
+	*chance = addArr(diceArr);
+}
+
+int* sort(int list[], int size) {
+	int index = 0, temp = 0, passes = 0;
+
+	for (passes = 1; passes < size; ++passes)
+	{
+		for (index = 0; index < size - passes; ++index)
+		{
+			if (list[index] > list[index + 1])
+			{
+				temp = list[index];
+				list[index] = list[index + 1];
+				list[index + 1] = temp;
+			}
+		}
+	}
+
+	return list;
+}
+
+void updateScores(int diceArr[], int ones, int twos, int threes, int fours, int fives, int sixes, int sum, int bonus, int tOfAKind, int fOfAKind, int fullHouse, int smStr, int lgStr, int yahtz, int chance, int die1, int die2, int die3, int die4, int die5) {
+	calcOnes(diceArr, ones);
+	calcTwos(diceArr, twos);
+	calcThrees(diceArr, threes);
+	calcFours(diceArr, fours);
+	calcFives(diceArr, fives);
+	calcSixes(diceArr, sixes);
+	calcSum(ones, twos, threes, fours, fives, sixes, &sum);
+	calcBonus(sum, &bonus);
+	calcThreeOfAKind(diceArr, tOfAKind);
+	calcFourOfAKind(diceArr, fOfAKind);
+	calcFullHouse(diceArr, fullHouse);
+	calcSmStr(diceArr, smStr);
+	calcLgStr(diceArr, lgStr);
+	calcYahtzee(diceArr, yahtzee);
+	s`umChance(diceArr, chance);
+	displayScoreCard(ones, twos, threes, fours, fives, sixes, sum, bonus, tOfAKind, fOfAKind, fullHouse, smStr, lgStr, yahtz, chance, die1, die2, die3, die4, die5);
+}
