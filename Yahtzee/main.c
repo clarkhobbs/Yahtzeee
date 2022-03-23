@@ -8,6 +8,8 @@ int main(void) {
 	//Changing dice Variables
 	int die1 = 0, die2 = 0, die3 = 0, die4 = 0, die5 = 0;
 
+	srand(time(NULL));
+
 	rollDie(&die1);
 	printf("%d", die1);
 	rollDie(&die2);

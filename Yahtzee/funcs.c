@@ -59,8 +59,6 @@ int validateMenu(void) { //Gets option and makes sure it is valid
 
 void rollDie(int *die) {
 
-	srand(time(NULL));
-
 	*die = (rand() % 6) + 1;
 }
 
@@ -203,11 +201,10 @@ int addArr(int diceArr[]) {
 }
 
 void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
-	bool present;
-	
+	bool present = NULL;
 	for (int i = 0; i < 5; i++) {
-		for (j = i; j < 14; j++) {
-			if (diceArr[i] == diceArr[j + 1]) {
+		for (int z = 0; z < 14; z++) {
+			if (diceArr[i] == diceArr[z + 1]) {
 				present = true;
 			}
 			else {
@@ -220,7 +217,8 @@ void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
 	}
 }
 void calcFourOfAKind(int diceArr[], int* fOfAKind) {
-	int tempArr[] = diceArr;
+	int tempArr[5];
+	strcpy(tempArr, diceArr);
 	sort(tempArr, 5);
 	if (tempArr[0] == tempArr[1] && tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3]) {
 			*fOfAKind == addArr(tempArr);
@@ -233,7 +231,8 @@ void calcFourOfAKind(int diceArr[], int* fOfAKind) {
 	}
 }
 void calcFullHouse(int diceArr[], int* fullHouse) {
-	int tempArr[] = diceArr;
+	int tempArr[5];
+	strcpy(tempArr, diceArr);
 	sort(tempArr, 5);
 	if (tempArr[1] == tempArr[2] && tempArr[3] == tempArr[4] && tempArr[4] == tempArr[5]) {
 		*fullHouse = 25;
@@ -246,7 +245,8 @@ void calcFullHouse(int diceArr[], int* fullHouse) {
 	}
 }
 void calcSmStr(int diceArr[], int* smStr) {
-	int tempArr[] = diceArr;
+	int tempArr[5];
+	strcpy(tempArr, diceArr);
 	sort(tempArr, 5);
 	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1) {
 		*smStr = 30;
@@ -256,7 +256,8 @@ void calcSmStr(int diceArr[], int* smStr) {
 	}
 }
 void calcLgStr(int diceArr[], int* lgStr) {
-	int tempArr[] = diceArr;
+	int tempArr[5];
+	strcpy(tempArr, diceArr);
 	sort(tempArr, 5);
 	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1 && tempArr[4] == tempArr[3] + 1) {
 		*lgStr = 40;
@@ -304,21 +305,20 @@ int* sort(int list[], int size) {
 	return list;
 }
 
-void updateScores(int diceArr[], int ones, int twos, int threes, int fours, int fives, int sixes, int sum, int bonus, int tOfAKind, int fOfAKind, int fullHouse, int smStr, int lgStr, int yahtz, int chance, int die1, int die2, int die3, int die4, int die5) {
-	calcOnes(diceArr, ones);
-	calcTwos(diceArr, twos);
-	calcThrees(diceArr, threes);
-	calcFours(diceArr, fours);
-	calcFives(diceArr, fives);
-	calcSixes(diceArr, sixes);
-	calcSum(ones, twos, threes, fours, fives, sixes, &sum);
-	calcBonus(sum, &bonus);
-	calcThreeOfAKind(diceArr, tOfAKind);
-	calcFourOfAKind(diceArr, fOfAKind);
-	calcFullHouse(diceArr, fullHouse);
-	calcSmStr(diceArr, smStr);
-	calcLgStr(diceArr, lgStr);
-	calcYahtzee(diceArr, yahtzee);
-	s`umChance(diceArr, chance);
-	displayScoreCard(ones, twos, threes, fours, fives, sixes, sum, bonus, tOfAKind, fOfAKind, fullHouse, smStr, lgStr, yahtz, chance, die1, die2, die3, die4, die5);
-}
+//void updateScores(int diceArr[], int *ones, int *twos, int *threes, int *fours, int *fives, int *sixes, int *sum, int *bonus, int *tOfAKind, int *fOfAKind, int *fullHouse, int *smStr, int *lgStr, int *yahtz, int *chance) {
+//	calcOnes(diceArr, *ones);
+//	calcTwos(diceArr, *twos);
+//	calcThrees(diceArr, *threes);
+//	calcFours(diceArr, *fours);
+//	calcFives(diceArr, *fives);
+//	calcSixes(diceArr, *sixes);
+//	calcSum(ones, twos, threes, fours, fives, sixes, &sum);
+//	calcBonus(sum, *bonus);
+//	calcThreeOfAKind(diceArr, *tOfAKind);
+//	calcFourOfAKind(diceArr, *fOfAKind);
+//	calcFullHouse(diceArr, *fullHouse);
+//	calcSmStr(diceArr, *smStr);
+//	calcLgStr(diceArr, *lgStr);
+//	calcYahtzee(diceArr, *yahtz);
+//	sumChance(diceArr, *chance);
+//}

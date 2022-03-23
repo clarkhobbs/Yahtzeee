@@ -16,6 +16,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
 
 
 #define RULES 1
@@ -45,7 +46,8 @@ void calcYahtzee(int diceArr[], int* yahtzee);
 void sumChance(int diceArr[], int* chance);
 int addArr(int diceArr[]);
 int* sort(int list[], int size);
-void updateScores(int diceArr[], int ones, int twos, int threes, int fours, int fives, int sixes, int sum, int bonus, int tOfAKind, int fOfAKind, int fullHouse, int smStr, int lgStr, int yahtz, int chance, int die1, int die2, int die3, int die4, int die5);
+void updateScores(int diceArr[], int ones, int twos, int threes, int fours, int fives, int sixes, int sum, int bonus, int tOfAKind, int fOfAKind, int fullHouse, int smStr, int lgStr, int yahtz, int chance);
+void choose(void);
 
 #endif // !YAHTZEE
 
