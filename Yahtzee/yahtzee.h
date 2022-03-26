@@ -22,6 +22,7 @@
 #define RULES 1
 #define YAHTZEE 2
 #define EXIT 3
+#define ENDGAME 13
 
 void displayMenu(void);
 void displayRules(void);
@@ -43,11 +44,12 @@ void calcFullHouse(int diceArr[], int* fullHouse);
 void calcSmStr(int diceArr[], int* smStr);
 void calcLgStr(int diceArr[], int* lgStr);
 void calcYahtzee(int diceArr[], int* yahtzee);
-void sumChance(int diceArr[], int* chance);
+void sumChance(int die1, int die2, int die3, int die4, int die5, int *chance);
 int addArr(int diceArr[]);
 int* sort(int list[], int size);
 void updateScores(int diceArr[], int ones, int twos, int threes, int fours, int fives, int sixes, int sum, int bonus, int tOfAKind, int fOfAKind, int fullHouse, int smStr, int lgStr, int yahtz, int chance);
-void choose(void);
+void chooseDie(char* hold1, char* hold2, char* hold3, char* hold4, char* hold5);
+void committScore(int *scoresFilled, int* scoresFilledChoice);
 
 #endif // !YAHTZEE
 

@@ -69,44 +69,48 @@ void displayScoreCard(int ones, int twos, int threes, int fours, int fives, int 
 	printf("|--------------|---------------|\n");
 	printf("|     Kind     |     Score     |\n");
 	printf("|--------------|---------------|\n");
-	printf("|     Ones     |       %d       |\n", ones);
+	printf("| 1   Ones     |       %d       |\n", ones);
 	printf("|--------------|---------------|\n");
-	printf("|     Twos     |       %d       |\n", twos);
+	printf("| 2   Twos     |       %d       |\n", twos);
 	printf("|--------------|---------------|\n");
-	printf("|     Threes   |       %d       |\n", threes);
+	printf("| 3   Threes   |       %d       |\n", threes);
 	printf("|--------------|---------------|\n");
-	printf("|     Fours    |       %d       |\n", fours);
+	printf("| 4   Fours    |       %d       |\n", fours);
 	printf("|--------------|---------------|\n");
-	printf("|     Fives    |       %d       |\n", fives);
+	printf("| 5   Fives    |       %d       |\n", fives);
 	printf("|--------------|---------------|\n");
-	printf("|     Sixes    |       %d       |\n", sixes);
+	printf("| 6   Sixes    |       %d       |\n", sixes);
 	printf("|------------- |---------------|\n");
 	printf("|     Sum      |       %d       |\n", sum);
 	printf("|--------------|---------------|\n");
 	printf("|    Bonus     |       %d       |\n", bonus);
 	printf("|--------------|---------------|\n");
-	printf("| Three-of-a-  |       %d       |\n", tOfAKind);
+	printf("| 7 Three-of-a-|       %d       |\n", tOfAKind);
 	printf("|    kind      |               |\n");
 	printf("|--------------|---------------|\n");
-	printf("|  Four-of-a-  |       %d       |\n", fOfAKind);
+	printf("| 8 Four-of-a- |       %d       |\n", fOfAKind);
 	printf("|    kind      |               |\n");
 	printf("|--------------|---------------|\n");
-	printf("|  Full House  |       %d       |\n", fullHouse);
+	printf("| 9 Full House |       %d       |\n", fullHouse);
 	printf("|--------------|---------------|\n");
-	printf("|     Small    |       %d       |\n", smStr);
+	printf("| 10  Small    |       %d       |\n", smStr);
 	printf("|   Straight   |               |\n");
 	printf("|--------------|---------------|\n");
-	printf("|     Large    |       %d       |\n", lgStr);
+	printf("| 11  Large    |       %d       |\n", lgStr);
 	printf("|   Straight   |               |\n");
 	printf("|------------- |---------------|\n");
-	printf("|   Yahtzee    |       %d       |\n", yahtz);
+	printf("| 12 Yahtzee   |       %d       |\n", yahtz);
 	printf("|--------------|---------------|\n");
-	printf("|    Chance    |       %d       |\n", chance);
+	printf("| 13 Chance    |       %d       |\n", chance);
 	printf("|------------------------------|\n");
 	printf("|  Die 1 |  Die 2 |  Die 3 |  Die 4 |  Die 5 |\n");
 	printf("|--------|--------|--------|--------|--------|\n");
 	printf("|   %d    |   %d    |   %d    |   %d    |   %d    |\n", die1, die2, die3, die4, die5);
 	printf("|--------------------------------------------|\n");
+
+	printf("Are you ready to roll or choose a score?\n");
+
+	system("pause");
 
 }
 
@@ -193,15 +197,12 @@ void calcBonus(int sum, int* bonus) {
 
 int addArr(int diceArr[]) {
 	int total = 0;
-	for (int i = 0; i < 4; i++) {
-		total = diceArr[i] + diceArr[i + 1];
-	}
-
+	total = diceArr[1] + diceArr[2] + diceArr[3] + diceArr[4] + diceArr[5];
 	return total;
 }
 
 void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
-	bool present = NULL;
+	bool present;
 	for (int i = 0; i < 5; i++) {
 		for (int z = 0; z < 14; z++) {
 			if (diceArr[i] == diceArr[z + 1]) {
@@ -217,27 +218,24 @@ void calcThreeOfAKind(int diceArr[], int* tOfAKind) {
 	}
 }
 void calcFourOfAKind(int diceArr[], int* fOfAKind) {
-	int tempArr[5];
-	strcpy(tempArr, diceArr);
-	sort(tempArr, 5);
-	if (tempArr[0] == tempArr[1] && tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3]) {
-			*fOfAKind == addArr(tempArr);
+	sort(diceArr, 5);
+	if (diceArr[0] == diceArr[1] && diceArr[1] == diceArr[2] && diceArr[2] == diceArr[3]) {
+			*fOfAKind = addArr(diceArr);
 	}
-	else if (tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3] && tempArr[3] == tempArr[4]) {
-		*fOfAKind = addArr(tempArr);
+	else if (diceArr[1] == diceArr[2] && diceArr[2] == diceArr[3] && diceArr[3] == diceArr[4]) {
+		*fOfAKind = addArr(diceArr);
 	}
 	else {
 		*fOfAKind = 0;
 	}
 }
 void calcFullHouse(int diceArr[], int* fullHouse) {
-	int tempArr[5];
-	strcpy(tempArr, diceArr);
-	sort(tempArr, 5);
-	if (tempArr[1] == tempArr[2] && tempArr[3] == tempArr[4] && tempArr[4] == tempArr[5]) {
+
+	sort(diceArr, 5);
+	if (diceArr[1] == diceArr[2] && diceArr[3] == diceArr[4] && diceArr[4] == diceArr[5]) {
 		*fullHouse = 25;
 	}
-	else if (tempArr[1] == tempArr[2] && tempArr[2] == tempArr[3] && tempArr[4] == tempArr[5]) {
+	else if (diceArr[1] == diceArr[2] && diceArr[2] == diceArr[3] && diceArr[4] == diceArr[5]) {
 		*fullHouse = 25;
 	}
 	else {
@@ -245,10 +243,8 @@ void calcFullHouse(int diceArr[], int* fullHouse) {
 	}
 }
 void calcSmStr(int diceArr[], int* smStr) {
-	int tempArr[5];
-	strcpy(tempArr, diceArr);
-	sort(tempArr, 5);
-	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1) {
+	sort(diceArr, 5);
+	if (diceArr[1] == diceArr[0] + 1 && diceArr[2] == diceArr[1] + 1 && diceArr[3] == diceArr[2] + 1) {
 		*smStr = 30;
 	}
 	else {
@@ -256,10 +252,8 @@ void calcSmStr(int diceArr[], int* smStr) {
 	}
 }
 void calcLgStr(int diceArr[], int* lgStr) {
-	int tempArr[5];
-	strcpy(tempArr, diceArr);
-	sort(tempArr, 5);
-	if (tempArr[1] == tempArr[0] + 1 && tempArr[2] == tempArr[1] + 1 && tempArr[3] == tempArr[2] + 1 && tempArr[4] == tempArr[3] + 1) {
+	sort(diceArr, 5);
+	if (diceArr[1] == diceArr[0] + 1 && diceArr[2] == diceArr[1] + 1 && diceArr[3] == diceArr[2] + 1 && diceArr[4] == diceArr[3] + 1) {
 		*lgStr = 40;
 	}
 	else {
@@ -282,8 +276,8 @@ void calcYahtzee(int diceArr[], int* yahtzee) {
 }
 
 
-void sumChance(int diceArr[], int* chance) {
-	*chance = addArr(diceArr);
+void sumChance(int die1, int die2, int die3, int die4, int die5, int *chance) {
+	*chance = die1 + die2 + die3 +die4 + die5;
 }
 
 int* sort(int list[], int size) {
@@ -322,3 +316,42 @@ int* sort(int list[], int size) {
 //	calcYahtzee(diceArr, *yahtz);
 //	sumChance(diceArr, *chance);
 //}
+
+
+void chooseDie(char* hold1, char* hold2, char* hold3, char *hold4, char* hold5) {
+	char die1 = '\0', die2 = '\0', die3 = '\0', die4 = '\0', die5 = '\0';
+
+	printf("Would you like to reroll die 1, y/n: ");
+	scanf(" %c", &die1);
+	printf("Die 2? y/n: ");
+	scanf(" %c", &die2);
+	printf("Die 3? y/n: ");
+	scanf(" %c", &die3);
+	printf("Die 4? y/n: ");
+	scanf(" %c", &die4);
+	printf("Die 5? y/n: ");
+	scanf(" %c", &die5);
+
+	*hold1 = die1;
+	*hold2 = die2;
+	*hold3 = die3;
+	*hold4 = die4;
+	*hold5 = die5;
+}
+
+void committScore(int* scoresFilled, int* scoresFilledChoice) {
+	int choice = 0;
+
+
+	printf("What score do you want to lock in? Type the row number you see on the table or 0 for no commitment: ");
+	scanf("%d", &choice);
+
+	if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8 || choice == 9 || choice == 10 || choice == 11 || choice == 12 || choice == 13) {
+		*scoresFilled++;
+		*scoresFilledChoice = choice;
+	}
+	else {
+		system("pause");
+		system("cls");
+	}
+}
